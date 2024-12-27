@@ -3,8 +3,13 @@ def main():
     book_string = read_full(book_path)
     num_words = wordcount(book_string)
     char_dict = letter_freq(book_string)
+    char_list = convert_dict(char_dict)
+    #char_list.sort(reverse=True, key=sort_on)
+    print(f"=-=-=-=-{book_path} Statistics-=-=-=-=")
     print(f"{num_words} words.")
-    print(f"Character count: {char_dict}")
+    for c in char_list:
+        for key, value in c.items():
+             print(f"The character {key} appears {value} times!")
 
 def read_full(text):
     with open(text) as f:
@@ -23,5 +28,13 @@ def letter_freq(text):
         else:
                 chars[char] = 1
     return chars
+def convert_dict(dict):
+    list_of_dicts = []
+    for key, value in dict.items():
+        list_of_dicts.append({key: value})
+    return list_of_dicts
+
+def sort_on(dict):
+    return dict["value"]
 
 main()
